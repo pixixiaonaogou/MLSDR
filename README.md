@@ -1,11 +1,11 @@
 # Dependencies
-1.pytorch==1.8.0
-2.sklearn ==0.24.1
-3.opencv == 4.5.1
-4. numpy == 1.19.2
-5. keras == 2.4.3
-6. pandas == 1.2.4
-7. tqdm == 4.60.0
+1. pytorch==1.8.0.
+2. sklearn ==0.24.1.
+3. opencv == 4.5.1.
+4. numpy == 1.19.2.
+5. keras == 2.4.3.
+6. pandas == 1.2.4.
+7. tqdm == 4.60.0.
 
 
 # How to use it
