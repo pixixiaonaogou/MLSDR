@@ -11,7 +11,7 @@
 # How to use it
 1. Firstly, please download the Seven-Point Checklist dataset on http://derm.cs.sfu.ca.
 2. Secondly, Please change the image path in dependency.py
-3. Then, set data_mode = 'Normal' and data_mode = 'self_evaluated' to run FusionNet
+3. Then, set data_mode = 'Normal' and data_mode = 'self_evaluated' to run FusionNet in main_cmv2.py
 to get the corresponding weights respectively. 
 4. Finally, run second_stage_fusion.ipynb sequently to get P1, P2, P3 respectively.
 the Fusion scheme 1 is also in this ipynb file for convience.
