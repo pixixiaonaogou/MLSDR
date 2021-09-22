@@ -275,7 +275,7 @@ if __name__ == '__main__':
     mode = 'multimodal'
     model_name = 'FusionM4Net-FS'
     shape = (224, 224)
-    batch_size = 32
+    batch_size = 20
     num_workers = 0
     lr = 3e-5
     epochs = 250
