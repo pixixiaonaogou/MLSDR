@@ -285,18 +285,15 @@ if __name__ == '__main__':
     rounds = 1
     
     
-      # create logger
-    i = i + 5
+  # create logger
+    i = rounds
     log, out_dir = CraateLogger(mode, model_name,i,data_mode)
-
     net = FusionNet(class_list).cuda()
 
   # create optimizer
     optimizer = optim.Adam(net.parameters(), lr=lr)
-  #optimizer = optim.SGD(filter(lambda p: p.requires_grad, net.parameters()),
-  #                      lr=lr, momentum=0.9, weight_decay=0.0001)
     opt = SWA(optimizer)
-      # create learning schdule
-      cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
-      run_train(model_name,mode,i)
+  # create learning schdule
+    cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
+    run_train(model_name,mode,i)
 
