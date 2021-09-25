@@ -27,103 +27,6 @@ class Swish_Module(nn.Module):
         return Swish.apply(x)
 
 
-class MultiLabelResNet(nn.Module):
-
-    def __init__(self, class_list,data_mode='SP'):
-        super(MultiLabelResNet, self).__init__()
-        self.num_label = class_list[0]
-        self.num_pn = class_list[1]
-        self.num_str = class_list[2]
-        self.num_pig = class_list[3]
-        self.num_rs = class_list[4]
-        self.num_dag = class_list[5]
-        self.num_bwv = class_list[6]
-        self.num_vs = class_list[7]
-        self.mag_label_num = 3
-        self.data_mode = data_mode
-        
-        
-        self.model = torchvision.models.resnet50(pretrained=True)
-        self.conv1 = self.model.conv1
-        self.bn1 = self.model.bn1
-        self.relu = self.model.relu
-        self.maxpool = self.model.maxpool
-        self.layer1 = self.model.layer1
-        self.layer2 = self.model.layer2
-        self.layer3 = self.model.layer3
-        self.layer4 = self.model.layer4
-        self.avgpool = self.model.avgpool
-        # self.fc = self.model.fc
-
-        if self.data_mode == 'SP':
-        
-          self.fc = nn.Linear(2048, self.num_label)
-          self.fc_pn = nn.Linear(2048, self.num_pn)
-          self.fc_str = nn.Linear(2048, self.num_str)
-          self.fc_pig = nn.Linear(2048, self.num_pig)
-          self.fc_rs = nn.Linear(2048, self.num_rs)
-          self.fc_dag = nn.Linear(2048, self.num_dag)
-          self.fc_bwv = nn.Linear(2048, self.num_bwv)
-          self.fc_vs = nn.Linear(2048, self.num_vs)
-        
-        else:
-          self.fc = nn.Linear(2048, self.num_label)
-          self.fc_mag = nn.Linear(2048,self.mag_label_num)
-                
-        # self.fc_ft = nn.
-
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.relu(x)
-        x = self.maxpool(x)
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
-        
-        if self.data_mode == 'SP':
-          logit = self.fc(x)       
-          logit_pn = self.fc_pn(x)
-          logit_str = self.fc_str(x)
-          logit_pig = self.fc_pig(x)
-          logit_rs = self.fc_rs(x)
-          logit_dag = self.fc_dag(x)
-          logit_bwv = self.fc_bwv(x)
-          logit_vs = self.fc_vs(x)
-  
-          return (logit, logit_pn, logit_str, logit_pig, logit_rs, logit_dag, logit_bwv, logit_vs)
-
-        else:
-          logit = self.fc(x)       
-          logit_mag = self.fc_mag(x)
-          
-          return (logit, logit_mag)
-
-    def criterion(self, logit, truth):
-
-        loss = nn.CrossEntropyLoss()(logit, truth)
-
-        return loss
- 
-    def metric(self, logit, truth):
-        # prob = F.sigmoid(logit)
-        _, prediction = torch.max(logit.data, 1)
-
-        acc = torch.sum(prediction == truth)
-        return acc
-
-    def set_mode(self, mode):
-        self.mode = mode
-        if mode in ['eval', 'valid', 'test']:
-            self.eval()
-        elif mode in ['train']:
-            self.train()
-        else:
-            raise NotImplementedError
-
 
 class FusionNet(nn.Module):
 
@@ -152,6 +55,7 @@ class FusionNet(nn.Module):
         self.layer3_cli = self.model_clinic.layer3
         self.layer4_cli = self.model_clinic.layer4
         self.avgpool_cli = self.model_clinic.avgpool
+        #self.avgpool_cli = nn.MaxPool2d(7, 7)
 
         self.conv1_derm = self.model_derm.conv1
         self.bn1_derm = self.model_derm.bn1
@@ -162,6 +66,7 @@ class FusionNet(nn.Module):
         self.layer3_derm = self.model_derm.layer3
         self.layer4_derm = self.model_derm.layer4
         self.avgpool_derm = self.model_derm.avgpool
+        #self.avgpool_derm = nn.MaxPool2d(7, 7)
         # self.fc = self.model.fc
         
 
@@ -257,6 +162,7 @@ class FusionNet(nn.Module):
         x_fusion = self.fc_fusion_(x_fusion)
 
         x_clic = self.clin_mlp(x_clic)
+        x_clic = self.dropout(x_clic)
         logit_clic = self.fc_cli(x_clic)
         logit_pn_clic  = self.fc_pn_cli(x_clic)
         logit_str_clic  = self.fc_str_cli(x_clic)
@@ -267,6 +173,7 @@ class FusionNet(nn.Module):
         logit_vs_clic  = self.fc_vs_cli(x_clic)
 
         x_derm = self.derm_mlp(x_derm)
+        x_derm = self.dropout(x_derm)
         logit_derm = self.fc_derm(x_derm)
         logit_pn_derm = self.fc_pn_derm(x_derm)
         logit_str_derm = self.fc_str_derm(x_derm)
@@ -320,6 +227,7 @@ class FusionNet(nn.Module):
             self.train()
         else:
             raise NotImplementedError      
+             
             
             
 
