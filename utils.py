@@ -42,6 +42,15 @@ class Logger:
     def close(self):
         self.txt.close()
 
+def set_seed(seed=15):
+      import random
+      random.seed(seed)
+      os.environ['PYTHONHASHSEED'] =str(seed)
+      np.random.seed(seed)
+      torch.manual_seed(seed)
+      torch.cuda.manual_seed(seed)
+      torch.cuda.manual_seed_all(seed)
+      torch.backends.cudnn.deterministic = True
 
 def CraateLogger(mode, model_name='resnet-50',round_=None,data_mode='Normal'):
 
