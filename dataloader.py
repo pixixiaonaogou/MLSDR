@@ -28,7 +28,8 @@ from albumentations import (
     RandomContrast,
     RandomGamma,
     RandomBrightness,
-    ShiftScaleRotate
+    ShiftScaleRotate,
+    RandomBrightnessContrast,
 )
 
 aug = Compose(
@@ -37,10 +38,10 @@ aug = Compose(
         HorizontalFlip(p=0.5),
         ShiftScaleRotate(shift_limit=0.0625,scale_limit=0.5,rotate_limit=45,p=0.5),
         RandomRotate90(p=0.5),
-
-        RandomContrast(p=0.5),
-        RandomBrightness(p=0.5),
-        RandomGamma(p=0.5)
+        RandomBrightnessContrast(p=0.5),
+        #RandomContrast(p=0.5),
+        #RandomBrightness(p=0.5),
+        #RandomGamma(p=0.5)
 
     ],
     p=0.5)
