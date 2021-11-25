@@ -300,7 +300,7 @@ if __name__ == '__main__':
         net = FusionNet(class_list).cuda()
       # create optimizer
         optimizer = optim.Adam(net.parameters(), lr=lr)
-        opt = SWA(optimizer)
+        opt = optimizer
       # create learning schdule
         cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
         run_train(model_name,mode,i)
