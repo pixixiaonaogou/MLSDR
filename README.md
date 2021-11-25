@@ -1,3 +1,6 @@
+# Introduction
+Raw code of FusionM4Net: A multi-stage multi-modal learning algorithm for multi-label skin lesion classification.
+
 # Dependencies
 1. pytorch==1.8.0.
 2. sklearn ==0.24.1.
@@ -23,7 +26,7 @@ the P_clin, P_derm and P_fusion, which are fused by Fusion Scheme 1 to obtain P_
 Set data_mode = 'self_evaluated' to run FusionNet is trained on our divided sub-training and sub-testing
 to get the prediction information to train the SVM cluster in second stage.
 
-Code is not complete, we will finish it as soon as possible. More details, please see our paper (will released soon). 
+More details, please see our paper (will released soon). 
 
 
 
