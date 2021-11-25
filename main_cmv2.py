@@ -9,6 +9,7 @@ from dataloader import generate_dataloader
 import torch
 import numpy as np
 import torch.nn.functional as F
+set_seed(100)
 
 def train(net,train_dataloader,model_name):
 
@@ -292,20 +293,14 @@ if __name__ == '__main__':
     swa_epoch = 50
     data_mode = 'Normal'
     train_dataloader, val_dataloader = generate_dataloader(shape, batch_size, num_workers, data_mode)
-    rounds = 5
     
-    for i in range(rounds):
-        
-        set_seed(seeds+i)
-      # create logger
-        
-        log, out_dir = CraateLogger(mode, model_name,i,data_mode)
-        net = FusionNet(class_list).cuda()
-
-      # create optimizer
-        optimizer = optim.Adam(net.parameters(), lr=lr)
-        opt = SWA(optimizer)
-      # create learning schdule
-        cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
-        run_train(model_name,mode,i)
+  # create logger
+    log, out_dir = CraateLogger(mode, model_name,i,data_mode)
+    net = FusionNet(class_list).cuda()
+  # create optimizer
+    optimizer = optim.Adam(net.parameters(), lr=lr)
+    opt = SWA(optimizer)
+  # create learning schdule
+    cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
+    run_train(model_name,mode,i)
 
