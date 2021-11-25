@@ -262,20 +262,20 @@ def run_train(model_name,mode,i):
             best_mean_acc = val_mean_acc
             torch.save(net.state_dict(), out_dir + '/checkpoint/{}_model.pth'.format('best_mean_acc'))
             log.write('Current Best Mean Acc is {}'.format(best_mean_acc))
-        else:
-            es += 1
-            print("Counter {} of {}".format(es,patience))
+        #else:
+        #    es += 1
+        #    print("Counter {} of {}".format(es,patience))
         
-            if es > patience:
-                print("Early stopping with best_mean_acc: {:.4f}".format(best_mean_acc), "and val_mean_acc for this epoch: {:.4f}".format(val_mean_acc))
-                break
+        #    if es > patience:
+        #        print("Early stopping with best_mean_acc: {:.4f}".format(best_mean_acc), "and val_mean_acc for this epoch: {:.4f}".format(val_mean_acc))
+        #        break
 
 
- #       if epoch > (epochs - swa_epoch) and epoch % 1 == 0:
- #           opt.update_swa()
- #           log.write('SWA Epoch: {}'.format(epoch))
+        if epoch > (epochs - swa_epoch) and epoch % 1 == 0:
+            opt.update_swa()
+            log.write('SWA Epoch: {}'.format(epoch))
 
- #    torch.save(net.state_dict(), out_dir+'/swa_{}_resnet50_model.pth'.format(mode))
+     torch.save(net.state_dict(), out_dir+'/swa_{}_resnet50_model.pth'.format(mode))
 
         
 if __name__ == '__main__':
