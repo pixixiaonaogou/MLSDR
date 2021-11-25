@@ -316,7 +316,8 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
            for weight_2 in weight_list:
 
                     weight_total = weight + weight_1 + weight_2
-                    
+                    if weight_total > 1: 
+                        continue
                     weight = weight / weight_total
                     weight_1 = weight_1 / weight_total
                     weight_2 = weight_2 / weight_total
