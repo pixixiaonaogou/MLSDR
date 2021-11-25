@@ -294,11 +294,7 @@ if __name__ == '__main__':
     data_mode = 'Normal'
     train_dataloader, val_dataloader = generate_dataloader(shape, batch_size, num_workers, data_mode)
     rounds = 5
-    useseed = True
-    
     for i in range(len(rounds)):
-        if useseed:
-            set_seed(seeds+i)
       # create logger
         log, out_dir = CraateLogger(mode, model_name,i,data_mode)
         net = FusionNet(class_list).cuda()
