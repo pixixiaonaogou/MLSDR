@@ -287,7 +287,7 @@ if __name__ == '__main__':
     shape = (224, 224)
     batch_size = 32
     num_workers = 8
-    seeds = 100
+    random_seeds = 135
     lr = 3e-5
     epochs = 250
     swa_epoch = 50
