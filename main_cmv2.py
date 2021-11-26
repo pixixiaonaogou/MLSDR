@@ -287,20 +287,27 @@ if __name__ == '__main__':
     shape = (224, 224)
     batch_size = 32
     num_workers = 8
-    random_seeds = 135
+    deterministic = True
+    if deterministic:
+        random_seeds = 137
+    else:
+        random_seeds = np.random.randint(1,10000)
+    rounds = 1
     lr = 3e-5
     epochs = 250
     swa_epoch = 50
     data_mode = 'Normal'
     train_dataloader, val_dataloader = generate_dataloader(shape, batch_size, num_workers, data_mode)
-
-  # create logger
-    log, out_dir = CraateLogger(mode, model_name,0,data_mode)
-    net = FusionNet(class_list).cuda()
-  # create optimizer
-    optimizer = optim.Adam(net.parameters(), lr=lr)
-    opt = SWA(optimizer)
-  # create learning schdule
-    cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
-    run_train(model_name,mode,i)
+    
+    for i in range(rounds):
+        set_seed(random_seeds + i)
+      # create logger
+        log, out_dir = CraateLogger(mode, model_name,i,data_mode)
+        net = FusionNet(class_list).cuda()
+      # create optimizer
+        optimizer = optim.Adam(net.parameters(), lr=lr)
+        opt = SWA(optimizer)
+      # create learning schdule
+        cosine_learning_schule = create_cosine_learing_schdule(epochs, lr)
+        run_train(model_name,mode,i)
 
