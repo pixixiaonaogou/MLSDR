@@ -308,7 +308,7 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
     if candidate_mode == 'CosineAnnealing':
       weight_list  = create_cosine_learing_schdule(search_num,1)
     elif candidate_mode == 'Linear':
-      weight_list  = np.linspace(0.1,1,num=search_num)
+      weight_list  = np.linspace(0.05,1,num=search_num)
     print(weight_list)
 
     for weight_1 in tqdm(weight_list):
