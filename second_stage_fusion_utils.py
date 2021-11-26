@@ -316,7 +316,7 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
            for weight_2 in weight_list:
 
                     weight_total = weight + weight_1 + weight_2
-                    if weight_total > 1:  # Note that these two command lines are updated after the paper publish since we just got the idea recenly, 
+                    if weight_total > 1:  # Note that these two command lines are updated after the paper publish since we just got the idea recenly to skip lots of repeted weighted array.
                                           # so we didn't write it in the pseudo code of Algorithm. 1 of our paper. 
                         continue          # There is no big difference on performance between the model using or not using these two command lines.
                                           # But it significantly speed up the searching process. So, we suggest you use it and when you use and set the search_num as 100, it just take within 10 second.
