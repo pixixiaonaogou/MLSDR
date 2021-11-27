@@ -298,7 +298,8 @@ if __name__ == '__main__':
     train_dataloader, val_dataloader = generate_dataloader(shape, batch_size, num_workers, data_mode)
     
     for i in range(rounds):
-        set_seed(random_seeds + i)
+        if deterministic:    
+            set_seed(random_seeds + i)
       # create logger
         log, out_dir = CraateLogger(mode, model_name,i,data_mode)
         net = FusionNet(class_list).cuda()
