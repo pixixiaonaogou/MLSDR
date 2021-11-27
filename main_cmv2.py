@@ -290,8 +290,6 @@ if __name__ == '__main__':
     deterministic = True
     if deterministic:
         random_seeds = 137
-    else:
-        random_seeds = np.random.randint(1,10000)
     rounds = 1
     lr = 3e-5
     epochs = 250
