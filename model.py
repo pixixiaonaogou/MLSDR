@@ -193,9 +193,9 @@ class FusionNet(nn.Module):
         logit_bwv_fusion  = self.fc_bwv_fusion(x_fusion)
         logit_vs_fusion  = self.fc_vs_fusion(x_fusion)
 
-        return [(logit_fusion, logit_pn_fusion, logit_str_fusion, logit_pig_fusion, logit_rs_fusion, logit_dag_fusion,logit_bwv_fusion, logit_vs_fusion),
+        return [(logit_derm, logit_pn_derm, logit_str_derm, logit_pig_derm, logit_rs_derm, logit_dag_derm, logit_bwv_derm, logit_vs_derm),
                 (logit_clic , logit_pn_clic , logit_str_clic , logit_pig_clic , logit_rs_clic , logit_dag_clic , logit_bwv_clic , logit_vs_clic ),
-                (logit_derm, logit_pn_derm, logit_str_derm, logit_pig_derm, logit_rs_derm, logit_dag_derm, logit_bwv_derm, logit_vs_derm)]
+                (logit_fusion, logit_pn_fusion, logit_str_fusion, logit_pig_fusion, logit_rs_fusion, logit_dag_fusion,logit_bwv_fusion, logit_vs_fusion)]
 
 
 
