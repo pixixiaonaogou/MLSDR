@@ -311,8 +311,8 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
       weight_list  = np.linspace(0.05,1,num=search_num)
     print(weight_list)
 
-    for weight_1 in tqdm(weight_list):
-        for weight in weight_list:
+    for weight in tqdm(weight_list):
+        for weight_1 in weight_list:
            for weight_2 in weight_list:
 
                     weight_total = weight + weight_1 + weight_2
@@ -325,15 +325,14 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
                     weight_2 = weight_2 / weight_total
                     
 
-                    logit_diagnosis_total = ((weight_2)*logit_diagnosis11 + weight*logit_diagnosis + weight_1*logit_diagnosis22)
-                    logit_pn_total = ((weight_2)*logit_pn11 + weight*logit_pn + weight_1*logit_pn22 )
-                    logit_str_total = ((weight_2)*logit_str11 + weight*logit_str + weight_1*logit_str22)
-                    logit_pig_total = ((weight_2)*logit_pig11 + weight*logit_pig + weight_1*logit_pig22)
-                    logit_rs_total = ((weight_2)*logit_rs11 + weight*logit_rs + weight_1*logit_rs22)
-                    logit_dag_total = ((weight_2)*logit_dag11 + weight*logit_dag + weight_1*logit_dag22)
-                    logit_bwv_total = ((weight_2)*logit_bwv11 + weight*logit_bwv + weight_1*logit_bwv22)
-                    logit_vs_total = ((weight_2)*logit_vs11 + weight*logit_vs + weight_1*logit_vs22)
-
+                    logit_diagnosis_total = ((weight_1)*logit_diagnosis11 + weight*logit_diagnosis + weight_2*logit_diagnosis22)
+                    logit_pn_total = ((weight_1)*logit_pn11 + weight*logit_pn + weight_2*logit_pn22 )
+                    logit_str_total = ((weight_1)*logit_str11 + weight*logit_str + weight_2*logit_str22)
+                    logit_pig_total = ((weight_1)*logit_pig11 + weight*logit_pig + weight_2*logit_pig22)
+                    logit_rs_total = ((weight_1)*logit_rs11 + weight*logit_rs + weight_2*logit_rs22)
+                    logit_dag_total = ((weight_1)*logit_dag11 + weight*logit_dag + weight_2*logit_dag22)
+                    logit_bwv_total = ((weight_1)*logit_bwv11 + weight*logit_bwv + weight_2*logit_bwv22)
+                    logit_vs_total = ((weight_1)*logit_vs11 + weight*logit_vs + weight_2*logit_vs22)
 
 
                     pred_list = []
@@ -593,14 +592,15 @@ def predict(net,test_index_list,df,weight_file,model_name,out_dir,mode,weight_li
         weight = weight_list[0]
         weight_1 = weight_list[1]
         weight_2 = weight_list[2]
-        logit_diagnosis = (weight*logit_diagnosis11 + weight_1*logit_diagnosis + weight_2*logit_diagnosis22)
-        logit_pn = (weight*logit_pn11 + weight_1*logit_pn + weight_2*logit_pn22 )
-        logit_str = (weight*logit_str11 + weight_1*logit_str + weight_2*logit_str22)
-        logit_pig = (weight*logit_pig11 + weight_1*logit_pig + weight_2*logit_pig22)
-        logit_rs = (weight*logit_rs11 + weight_1*logit_rs + weight_2*logit_rs22)
-        logit_dag = (weight*logit_dag11 + weight_1*logit_dag + weight_2*logit_dag22)
-        logit_bwv = (weight*logit_bwv11 + weight_1*logit_bwv + weight_2*logit_bwv22)
-        logit_vs = (weight*logit_vs11 + weight_1*logit_vs + weight_2*logit_vs22)
+
+        logit_diagnosis = (weight_1*logit_diagnosis11 + weight*logit_diagnosis + weight_2*logit_diagnosis22)
+        logit_pn = (weight_1*logit_pn11 + weight*logit_pn + weight_2*logit_pn22 )
+        logit_str = (weight_1*logit_str11 + weight*logit_str + weight_2*logit_str22)
+        logit_pig = (weight_1*logit_pig11 + weight*logit_pig + weight_2*logit_pig22)
+        logit_rs = (weight_1*logit_rs11 + weight*logit_rs + weight_2*logit_rs22)
+        logit_dag = (weight_1*logit_dag11 + weight*logit_dag + weight_2*logit_dag22)
+        logit_bwv = (weight_1*logit_bwv11 + weight*logit_bwv + weight_2*logit_bwv22)
+        logit_vs = (weight_1*logit_vs11 + weight*logit_vs + weight_2*logit_vs22)
 
       
         # diagnositic_pred
