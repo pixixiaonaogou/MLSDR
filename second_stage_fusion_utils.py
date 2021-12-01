@@ -227,14 +227,23 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
         # vs_label
         vs_label_list.append(vascular_structures_label)
 
-        gt = np.array(gt_list)
-        pn_gt = np.array(pn_label_list)
-        str_gt = np.array(str_label_list)
-        pig_gt = np.array(pig_label_list)
-        rs_gt = np.array(rs_label_list)
-        dag_gt = np.array(dag_label_list)
-        bwv_gt = np.array(bwv_label_list)
-        vs_gt = np.array(vs_label_list)
+#        gt = np.array(gt_list)
+#        pn_gt = np.array(pn_label_list)
+#        str_gt = np.array(str_label_list)
+#        pig_gt = np.array(pig_label_list)
+#        rs_gt = np.array(rs_label_list)
+#        dag_gt = np.array(dag_label_list)
+#        bwv_gt = np.array(bwv_label_list)
+#        vs_gt = np.array(vs_label_list)
+
+    gt = np.array(gt_list)
+    pn_gt = np.array(pn_label_list)
+    str_gt = np.array(str_label_list)
+    pig_gt = np.array(pig_label_list)
+    rs_gt = np.array(rs_label_list)
+    dag_gt = np.array(dag_label_list)
+    bwv_gt = np.array(bwv_label_list)
+    vs_gt = np.array(vs_label_list)
 
     logit_diagnosis,logit_diagnosis11,logit_diagnosis22 = [],[],[]
     logit_pn,logit_pn11,logit_pn22 = [],[],[]
