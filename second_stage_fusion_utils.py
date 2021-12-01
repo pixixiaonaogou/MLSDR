@@ -142,7 +142,7 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
           logit_vs22),
          ] = net(((clinic_img_tensor).cuda(), dermoscopy_img_tensor.cuda()))
 
-            
+        '''    
         pred = softmax(logit_diagnosis.detach().cpu().numpy())
         pred = np.mean(pred, 0);
         pn_pred = softmax(logit_pn.detach().cpu().numpy())
@@ -193,7 +193,7 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
         bwv_pred22 = np.mean(bwv_pred22, 0);
         vs_pred22 = softmax(logit_vs22.detach().cpu().numpy());
         vs_pred22 = np.mean(vs_pred22, 0);
-
+        '''
 
         total_pred_list.append([(logit_diagnosis.detach().cpu().numpy(), logit_pn.detach().cpu().numpy(), logit_str.detach().cpu().numpy(),
                                  logit_pig.detach().cpu().numpy(), logit_rs.detach().cpu().numpy(), logit_dag.detach().cpu().numpy(),
