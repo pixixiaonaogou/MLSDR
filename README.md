@@ -26,7 +26,7 @@ the P_clin, P_derm and P_fusion, which are fused by Fusion Scheme 1 to obtain P_
 Set data_mode = 'self_evaluated' to run FusionNet is trained on our divided sub-training and sub-testing
 to get the prediction information to train the SVM cluster in second stage.
 
-More details, please see our paper (will released soon). 
+More details, please see our paper "FusionM4Net: A multi-stage multi-modal learning algorithm for multi-label skin lesion classification" (DOI: https://doi.org/10.1016/j.media.2021.102307). 
 
 
 
