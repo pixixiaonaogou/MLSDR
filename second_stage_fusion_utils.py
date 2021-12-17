@@ -424,7 +424,7 @@ def find_best_threshold(net,test_index_list,df,weight_file,model_name,out_dir,mo
                     #save_weight_list.append([weight_2,weight,weight_1])
                     if avg_acc > best_acc :
                         best_acc =avg_acc
-                        best_weight = (weight_2,weight,weight_1)
+                        best_weight = (weight,weight_1,weight_2)
                         print(best_acc)
                         print(best_weight)
                       #  acc_list.append(avg_acc)
