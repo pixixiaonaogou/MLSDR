@@ -215,7 +215,7 @@ def generate_dataloader(shape,batch_size,num_workers,data_mode):
   
       val_skindataset = SkinDataset(image_dir=source_dir,
                                     img_info=df,
-                                    file_list=train_index_list_2,
+                                    file_list=val_index_list,
                                     shape=shape, is_test=True,
                                     )
   
