@@ -287,6 +287,7 @@ if __name__ == '__main__':
     shape = (224, 224)
     batch_size = 32
     num_workers = 8
+    data_mode = 'Normal'
     deterministic = True
     if deterministic:
         if data_mode == 'Normal':
@@ -297,7 +298,7 @@ if __name__ == '__main__':
     lr = 3e-5
     epochs = 250
     swa_epoch = 50
-    data_mode = 'Normal'
+
     train_dataloader, val_dataloader = generate_dataloader(shape, batch_size, num_workers, data_mode)
     
     for i in range(rounds):
