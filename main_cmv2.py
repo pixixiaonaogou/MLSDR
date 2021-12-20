@@ -289,7 +289,10 @@ if __name__ == '__main__':
     num_workers = 8
     deterministic = True
     if deterministic:
-        random_seeds = 177
+        if data_mode == 'Normal':
+            random_seeds = 170
+        elif data_mode == 'self_evaluated':
+            random_seeds = 183
     rounds = 1
     lr = 3e-5
     epochs = 250
