@@ -1,5 +1,5 @@
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '6'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 from utils import Logger, adjust_learning_rate, CraateLogger,create_cosine_learing_schdule,encode_test_label,set_seed
 from model import FusionNet
 from dependency import *
@@ -263,20 +263,20 @@ def run_train(model_name,mode,i):
             best_mean_acc = val_mean_acc
             torch.save(net.state_dict(), out_dir + '/checkpoint/{}_model.pth'.format('best_mean_acc'))
             log.write('Current Best Mean Acc is {}'.format(best_mean_acc))
-      #  else:
-      #      es += 1
-      #      print("Counter {} of {}".format(es,patience))
-        
-      #      if es > patience:
-      #          print("Early stopping with best_mean_acc: {:.4f}".format(best_mean_acc), "and val_mean_acc for this epoch: {:.4f}".format(val_mean_acc))
-      #          break
-
-
+        #  else:
+        #      es += 1
+        #      print("Counter {} of {}".format(es,patience))
+          
+        #      if es > patience:
+        #          print("Early stopping with best_mean_acc: {:.4f}".format(best_mean_acc), "and val_mean_acc for this epoch: {:.4f}".format(val_mean_acc))
+        #          break
+  
+  
         if epoch > (epochs - swa_epoch) and epoch % 1 == 0:
             opt.update_swa()
             log.write('SWA Epoch: {}'.format(epoch))
 
-       torch.save(net.state_dict(), out_dir+'/swa_{}_resnet50_model.pth'.format(mode))
+    torch.save(net.state_dict(), out_dir+'/swa_{}_resnet50_model.pth'.format(mode))
 
         
 if __name__ == '__main__':
@@ -287,13 +287,13 @@ if __name__ == '__main__':
     shape = (224, 224)
     batch_size = 32
     num_workers = 8
-    data_mode = 'Normal'
+    data_mode = 'self_evaluated'
     deterministic = True
     if deterministic:
         if data_mode == 'Normal':
-            random_seeds = 170
+          random_seeds = 170
         elif data_mode == 'self_evaluated':
-            random_seeds = 183
+          random_seeds = 183
     rounds = 1
     lr = 3e-5
     epochs = 250
@@ -305,6 +305,7 @@ if __name__ == '__main__':
         if deterministic:
             set_seed(random_seeds + i)
       # create logger
+        print(random_seeds+i)
         log, out_dir = CraateLogger(mode, model_name,i,data_mode)
         net = FusionNet(class_list).cuda()
       # create optimizer
