@@ -293,15 +293,9 @@ def encode_meta_label(img_info,index_num):
     management_label_one_hot
     ])
     
-    meta_vector_1 = np.hstack([
-    level_of_diagnostic_difficulty_label_one_hot,
-    evaluation_label_one_hot,
-    location_label_one_hot,
-    sex_label_one_hot,
-    ])
     
 
-    return meta_vector, meta_vector_1, management_label_index
+    return meta_vector, _, _
 
 def encode_meta_label_extra(img_info,index_num):
 
