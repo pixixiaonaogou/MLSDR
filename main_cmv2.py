@@ -36,12 +36,12 @@ def train(net,train_dataloader,model_name):
         vs_label = label[7].long().cuda()
 
 
-        [(logit_diagnosis_fusion, logit_pn_fusion, logit_str_fusion, logit_pig_fusion, logit_rs_fusion, logit_dag_fusion, logit_bwv_fusion, 
-          logit_vs_fusion), # The prediction from branch fusion, P_fusion
+        [(logit_diagnosis_derm, logit_pn_derm, logit_str_derm, logit_pig_derm, logit_rs_derm, logit_dag_derm, logit_bwv_derm, 
+          logit_vs_derm), 
          (logit_diagnosis_clic, logit_pn_clic, logit_str_clic, logit_pig_clic, logit_rs_clic, logit_dag_clic, logit_bwv_clic,
-          logit_vs_clic),   # The prediction from branch clinical image, P_clic
-         (logit_diagnosis_derm, logit_pn_derm, logit_str_derm, logit_pig_derm, logit_rs_derm, logit_dag_derm, logit_bwv_derm, # The prediction from branch dermoscopy image, P_derm
-          logit_vs_derm) ] = net((clinic_image,derm_image))
+          logit_vs_clic),  
+         (logit_diagnosis_fusion, logit_pn_fusion, logit_str_fusion, logit_pig_fusion, logit_rs_fusion, logit_dag_fusion, logit_bwv_fusion, 
+          logit_vs_fusion) ] = net((clinic_image,derm_image))
         
         
         loss_fusion = torch.true_divide(
@@ -144,12 +144,12 @@ def validation(net,val_dataloader,model_name):
         with torch.no_grad():
 
 
-          [(logit_diagnosis_fusion, logit_pn_fusion, logit_str_fusion, logit_pig_fusion, logit_rs_fusion, logit_dag_fusion, logit_bwv_fusion, 
-          logit_vs_fusion),
-           (logit_diagnosis_clic, logit_pn_clic, logit_str_clic, logit_pig_clic, logit_rs_clic, logit_dag_clic, logit_bwv_clic,
-            logit_vs_clic),
-           (logit_diagnosis_derm, logit_pn_derm, logit_str_derm, logit_pig_derm, logit_rs_derm, logit_dag_derm, logit_bwv_derm,
-            logit_vs_derm)] = net((clinic_image,derm_image))
+          [(logit_diagnosis_derm, logit_pn_derm, logit_str_derm, logit_pig_derm, logit_rs_derm, logit_dag_derm, logit_bwv_derm, 
+              logit_vs_derm), 
+              (logit_diagnosis_clic, logit_pn_clic, logit_str_clic, logit_pig_clic, logit_rs_clic, logit_dag_clic, logit_bwv_clic,
+              logit_vs_clic),  
+              (logit_diagnosis_fusion, logit_pn_fusion, logit_str_fusion, logit_pig_fusion, logit_rs_fusion, logit_dag_fusion, logit_bwv_fusion, 
+              logit_vs_fusion)] = net((clinic_image,derm_image))
   
           loss_fusion = torch.true_divide(
               net.criterion(logit_diagnosis_fusion, diagnosis_label)
