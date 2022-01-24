@@ -21,7 +21,7 @@ the Fusion scheme 1 is also in this ipynb file for convience.
 Note that you need to change the image path "source_dir" according the dataset in your experiments.
 
 Set data_mode = 'Normal' to run FusionNet is trained on the defaulted training and validation dataset to get 
-the P_clin, P_derm and P_fusion, which are fused by Fusion Scheme 1 to obtain P_1
+the P_clin, P_derm and P_fusion, which are fused by Fusion Scheme 1 to obtain P_1 (the result of stage 1 of FusionM4Net) in the second_stage_fusion.ipynb.
 
 Set data_mode = 'self_evaluated' to run FusionNet is trained on our divided sub-training and sub-testing
 to get the prediction information to train the SVM cluster in second stage.
